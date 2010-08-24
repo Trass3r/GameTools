@@ -44,7 +44,7 @@ private:
 			string name = to!string(nametable.ptr + table[i].NameOffset);
 			
 			// Eintrag schreiben
-			//printf("%.*s\n", name);
+			//write(name);
 			
 			if(table[i].flags & 0x10) // ist Ordner
 			{
@@ -67,29 +67,29 @@ private:
 					hOut.open(name, FileMode.Out);
 					if (buffer.length < table[i].size2)
 					{
-						debug printf("increasing buffer size to %d\n", table[i].size2);
+						debug writef("increasing buffer size to %d\n", table[i].size2);
 						buffer.length = table[i].size2;
 					}
 					hIn.readExact(buffer.ptr, table[i].size2);
-					debug printf("read the file..");
+					debug write("read the file..");
 					hOut.writeExact(buffer.ptr, table[i].size2);
-					debug printf("wrote the file\n");
+					debug write("wrote the file\n");
 				}
 				catch(OpenException e)
 				{
-					printf("OpenException: %.*s\n", e.toString());
+					writef("OpenException: %s\n", e.toString());
 				}
 				catch(ReadException e)
 				{
-					printf("ReadException: %.*s\n", e.toString());
+					writef("ReadException: %s\n", e.toString());
 				}
 				catch(WriteException e)
 				{
-					printf("WriteException: %.*s\n", e.toString());
+					writef("WriteException: %s\n", e.toString());
 				}
 				catch(Exception e)
 				{
-					printf("Exception: %.*s\n", e.toString());
+					writef("Exception: %s\n", e.toString());
 				}
 				finally
 				{
@@ -103,7 +103,7 @@ private:
 				break;
 			}
 			i = table[i].NextOffset/header.EntrySize; // nächstes Element in selber Ebene durchlaufen
-			debug printf("Ende der Schleife\n");
+			debug write("Ende der Schleife\n");
 		}
 	}
 
@@ -145,7 +145,7 @@ public:
 		}
 		catch (Exception e)
 		{
-			writef("%.*s\n", e.toString());
+			writeln(e.toString());
 		}
 		finally
 		{

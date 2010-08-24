@@ -170,7 +170,7 @@ public:
 		}
 		catch(Exception e)
 		{
-			writef("%.*s\n", e.toString());
+			writeln(e.toString());
 		}
 		finally
 		{

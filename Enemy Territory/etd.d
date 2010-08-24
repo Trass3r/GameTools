@@ -104,7 +104,7 @@ int main(string[] args)
 	}
 	catch(Exception e)
 	{
-		printf("%.*s\n", e.toString());
+		writeln(e.toString());
 	}
 	finally
 	{
